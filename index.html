@@ -28,7 +28,51 @@
 
 <body>
     <div class='wpBackground'>
-        
+        <div class='d-flex flex-column h-100'>
+            <div id='wpMain' class='container'>
+
+                <div class='row'>
+                    <div id='wpTitle' class='col text-center'>
+                        WEATHER APP
+                    </div>
+                </div>
+
+                <div class='row'>
+                    <div id='wpCurrent' class='col'>
+                        <div class='row'>
+                            <div id='wpTemp' class='col-sm'>
+                                <div id='location' class='row col d-md-inline-block'>
+                                    Loures, Lisboa
+                                </div>
+                                <div class='row col d-md-inline-block' id='dayTime'>Monday, 12:00PM</div>
+                                <div class='row col d-md-inline-block' id='summary'>Mostly Sunny</div>
+                                <div class='row col d-md-inline-block' id='currentTemp'>
+                                    21&deg;
+                                </div>
+                            </div>
+                            <div class='col-sm'>
+                                <img id='weatherIcon' class='img-fluid' src='images/MostlySunny.png'>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='row'>
+                    <div id='wpConditions' class='col-md'>
+                        <div class='row'>
+                            <div id='precipitation' class='col-md'>Precipitation 20%</div>
+                        </div>
+                        <div class='row'>
+                            <div id='humidity' class='col-md'>Humidity 90%</div>
+                        </div>
+                        <div class='row'>
+                            <div id='wind' class='col-md'>Wind 14mph</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 
     <!-- Optional JavaScript -->
