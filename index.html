@@ -19,8 +19,6 @@
     <meta name="theme-color" content="#ffffff">
     <!--End Fav icon-->
 
-    <script src="keys.js"></script>
-    <script src="weather.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -37,18 +35,24 @@
                     </div>
                 </div>
 
+                <div class='row search-row'>
+                    <input type='text' autocomplete='off' class='search-box' placeholder='Search for a city...'/>
+                </div>
+
                 <div class='row'>
+
                     <div id='wpCurrent' class='col'>
-                        <div class='row'>
-                            <div id='wpTemp' class='col-sm'>
-                                <div id='location' class='row col d-md-inline-block'>
+                        <div class='row d-flex align-items-center'>
+                            <div id='wpTemp' class='col-sm text-center'>
+                                <div class='row col d-md-inline-block location'>
                                     Loures, Lisboa
                                 </div>
-                                <div class='row col d-md-inline-block' id='dayTime'>Monday, 12:00PM</div>
-                                <div class='row col d-md-inline-block' id='summary'>Mostly Sunny</div>
-                                <div class='row col d-md-inline-block' id='currentTemp'>
-                                    21&deg;
+                                <div class='row col d-md-inline-block date'>Monday, 12:00PM</div>
+                                <div class='row col d-md-inline-block weather'>Mostly Sunny</div>
+                                <div class='row col d-md-inline-block temp'>
+                                    21&deg;c
                                 </div>
+                                <div class='row col d-md-inline-block hi-low'>min 10&deg;c / max 22&deg;c</div>
                             </div>
                             <div class='col-sm'>
                                 <img id='weatherIcon' class='img-fluid' src='images/MostlySunny.png'>
@@ -101,7 +105,7 @@
                     <div id='wpFooter' class='col text-center'>
                         <div class='row'>
                             <div class='col'>
-                                <a href='https://darksky.net/poweredby' target='_blank'>Powered by Dark Sky</a>
+                                <a href='https://openweathermap.org/api' target='_blank'>Powered by OpenWeatherMap API</a>
                             </div>
                             <div class='col'>
                                 <a href='https://www.migueltavares.co.uk' target='_blank'>Miguel's Portfolio</a>
@@ -114,7 +118,8 @@
         </div>
     </div>
 
-    <!-- Optional JavaScript -->
+    <!-- JavaScript -->
+    <script src="weather.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
