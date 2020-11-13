@@ -1,10 +1,12 @@
 const api = {
-    key: "44da7bee39bd74ea2f0b205de074b4f5",
-    base: "https://api.openweathermap.org/data/2.5/",
+    key: "6156b48ef3994ca6a5e130547201311",
+    base: "https://api.weatherapi.com/v1",
 }
 
 const searchbox = document.querySelector('.search-box');
 searchbox.addEventListener('keypress', setQuery);
+
+http://api.weatherapi.com/v1/forecast.json?key=<YOUR_API_KEY>&q=07112&days=7
 
 function setQuery(evt) {
     if (evt.keyCode == 13) {
@@ -13,7 +15,7 @@ function setQuery(evt) {
 }
 
 function getResults(query) {
-    fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+    fetch(`${api.base}/forecast.json?key=${api.key}&q=${query}&days=7`)
         .then(weather => {
             return weather.json();
         }).then(displayResults);
@@ -22,20 +24,20 @@ function getResults(query) {
 function displayResults(weather) {
     console.log(weather);
     let city = document.querySelector('.location');
-    city.innerText = `${weather.name}, ${weather.sys.country}`;
+    city.innerText = `${weather.location.name}, ${weather.location.country}`;
 
     let now = new Date();
     let date = document.querySelector('.date');
     date.innerText = dateBuilder(now);
 
     let temp = document.querySelector('.temp');
-    temp.innerHTML = `${Math.round(weather.main.temp)}<span>&deg;c</span>`;
+    temp.innerHTML = `${Math.round(weather.current.temp_c)}<span>&deg;c</span>`;
 
     let weather_el = document.querySelector('.weather');
-    weather_el.innerText = weather.weather[0].main;
+    weather_el.innerText = `${weather.current.condition.text}`;
 
-    let hilow = document.querySelector('.hi-low');
-    hilow.innerText = `min ${Math.round(weather.main.temp_min)}°c / max ${Math.round(weather.main.temp_max)}°c`;
+    let hilow = document.querySelector('.feelsLike');
+    hilow.innerText = `Feels Like ${Math.round(weather.current.feelslike_c)}°c`;
 }
 
 function dateBuilder(d) {
