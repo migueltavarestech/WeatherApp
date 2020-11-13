@@ -6,8 +6,6 @@ const api = {
 const searchbox = document.querySelector('.search-box');
 searchbox.addEventListener('keypress', setQuery);
 
-http://api.weatherapi.com/v1/forecast.json?key=<YOUR_API_KEY>&q=07112&days=7
-
 function setQuery(evt) {
     if (evt.keyCode == 13) {
         getResults(searchbox.value);
@@ -38,6 +36,15 @@ function displayResults(weather) {
 
     let hilow = document.querySelector('.feelsLike');
     hilow.innerText = `Feels Like ${Math.round(weather.current.feelslike_c)}°c`;
+
+    let humidity = document.querySelector('.humidity');
+    humidity.innerText = `Humidity ${weather.current.humidity}%`;
+
+    let rain = document.querySelector('.rain');
+    rain.innerText = `Chance Of Rain ${weather.forecast.forecastday[0].day.daily_chance_of_rain}%`;
+
+    let wind = document.querySelector('.wind');
+    wind.innerText = `Wind ${weather.current.gust_mph}mph`;
 }
 
 function dateBuilder(d) {
