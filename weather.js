@@ -3,6 +3,32 @@ const api = {
     base: "https://api.weatherapi.com/v1",
 }
 
+const iconValue = {
+    CLEARDAY: 'clear-day',
+    CLEARNIGHT: '//cdn.weatherapi.com/weather/64x64/night/113.png',
+    RAIN: '//cdn.weatherapi.com/weather/64x64/day/299.png',
+    RAIN_2: '//cdn.weatherapi.com/weather/64x64/day/305.png',
+    RAIN_3: '//cdn.weatherapi.com/weather/64x64/day/353.png',
+    RAIN_4: '//cdn.weatherapi.com/weather/64x64/day/356.png',
+    LIGHT_RAIN_DAY: '//cdn.weatherapi.com/weather/64x64/day/296.png',
+    LIGHT_RAIN_NIGHT: '//cdn.weatherapi.com/weather/64x64/night/296.png',
+    THUNDER_DAY: '//cdn.weatherapi.com/weather/64x64/day/389.png',
+    THUNDER_NIGHT: '//cdn.weatherapi.com/weather/64x64/night/389.png',
+    SNOW: '//cdn.weatherapi.com/weather/64x64/day/326.png',
+    SLEET: 'sleet',
+    WIND: 'wind',
+    FOG: 'fog',
+    CLOUDY: 'cloudy',
+    PARTLY_CLOUDY_DAY: '//cdn.weatherapi.com/weather/64x64/day/116.png',
+    PARTLY_CLOUDY_NIGHT: '//cdn.weatherapi.com/weather/64x64/night/116.png',
+    MIST_DAY: '//cdn.weatherapi.com/weather/64x64/day/116.png',
+    MIST_NIGHT: '//cdn.weatherapi.com/weather/64x64/night/116.png',
+    MIST_DAY_2: '//cdn.weatherapi.com/weather/64x64/day/143.png',
+    MIST_NIGHT_2: '//cdn.weatherapi.com/weather/64x64/night/143.png',
+    FOG_DAY: '//cdn.weatherapi.com/weather/64x64/day/248.png',
+    FOG_NIGHT: '//cdn.weatherapi.com/weather/64x64/night/248.png'
+}
+
 const searchbox = document.querySelector('.search-box');
 searchbox.addEventListener('keypress', setQuery);
 
@@ -45,6 +71,12 @@ function displayResults(weather) {
 
     let wind = document.querySelector('.wind');
     wind.innerText = `Wind ${weather.current.gust_mph}mph`;
+
+    document.getElementById('weatherIcon').src = getICON(weather.current.condition.icon);
+
+    // render the forecast tabs
+    // document.getElementById('dailyForecast').innerHTML = renderWeeklyForecast(data.daily);
+    document.getElementById('weeklyForecast').innerHTML = renderRow(weather);
 }
 
 function dateBuilder(d) {
@@ -57,4 +89,53 @@ function dateBuilder(d) {
     let year = d.getFullYear();
 
     return `${day} ${date} ${month} ${year}`;
+}
+
+function getICON(icon) {
+    switch(icon) {
+        case iconValue.CLEARDAY:
+            return 'images/SunnyDay.png';
+        case iconValue.MIST_DAY:
+        case iconValue.MIST_DAY_2:
+        case iconValue.PARTLY_CLOUDY_DAY:
+            return 'images/MostlySunny.png';
+        case iconValue.CLEARNIGHT:
+            return 'images/ClearMoon.png';
+        case iconValue.MIST_NIGHT:
+        case iconValue.MIST_NIGHT_2:
+        case iconValue.FOG_DAY:
+        case iconValue.FOG_NIGHT:
+        case iconValue.PARTLY_CLOUDY_NIGHT:
+            return 'images/CloudyMoon.png';
+        case iconValue.RAIN:
+        case iconValue.RAIN_2:
+        case iconValue.RAIN_3:
+        case iconValue.RAIN_4:
+        case iconValue.LIGHT_RAIN_DAY:
+        case iconValue.LIGHT_RAIN_NIGHT:
+        case iconValue.THUNDER_DAY:
+        case iconValue.THUNDER_NIGHT: 
+            return 'images/Rain.png';
+        case iconValue.SNOW:
+            return 'images/Snow.png';
+        case iconValue.SLEET:
+            return 'images/Sleet.png';
+        default:
+            return 'images/SunnyDay.png';
+    }
+}
+
+function renderRow(weather) {
+    var resultsHTML = "<tr><th>Day</th><th>Conditions</th><th>Hi</th><th>Lo</th></tr>";
+    
+    for (i=0; i<3; i++) {
+        let dayTime = `${weather.forecast.forecastday[i].date}`;
+        let summary = `${weather.forecast.forecastday[i].day.condition.text}`;
+        let tempHigh = `${weather.forecast.forecastday[i].day.maxtemp_c}`;
+        let tempLow = `${weather.forecast.forecastday[i].day.mintemp_c}`;
+
+        resultsHTML += `<tr><td>${dayTime}</td><td>${summary}</td><td>${tempHigh}</td><td>${tempLow}</td><tr>`
+    }
+
+    return resultsHTML
 }
