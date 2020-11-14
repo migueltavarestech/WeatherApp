@@ -75,8 +75,10 @@ function displayResults(weather) {
     document.getElementById('weatherIcon').src = getICON(weather.current.condition.icon);
 
     // render the forecast tabs
-    // document.getElementById('dailyForecast').innerHTML = renderWeeklyForecast(data.daily);
-    document.getElementById('weeklyForecast').innerHTML = renderRow(weather);
+    document.getElementById('dailyForecast').innerHTML = renderDailyRow(weather);
+    document.getElementById('weeklyForecast').innerHTML = renderWeeklyRow(weather);
+    document.getElementById("dailyForecast").style.overflow = "scroll";
+    
 }
 
 function dateBuilder(d) {
@@ -125,9 +127,8 @@ function getICON(icon) {
     }
 }
 
-function renderRow(weather) {
+function renderWeeklyRow(weather) {
     var resultsHTML = "<tr><th>Day</th><th>Conditions</th><th>Hi</th><th>Lo</th></tr>";
-    
     for (i=0; i<3; i++) {
         let dayTime = `${weather.forecast.forecastday[i].date}`;
         let summary = `${weather.forecast.forecastday[i].day.condition.text}`;
@@ -136,6 +137,19 @@ function renderRow(weather) {
 
         resultsHTML += `<tr><td>${dayTime}</td><td>${summary}</td><td>${tempHigh}</td><td>${tempLow}</td><tr>`
     }
+    return resultsHTML
+}
 
+function renderDailyRow(weather) {
+    var resultsHTML = "<tr><th>Time</th><th>Conditions</th><th>Temp</th><th>Precip</th></tr>";
+    for (i=1; i<24; i+=2) {
+        let time = `${weather.forecast.forecastday[0].hour[i].time}`;
+        time = time.substr(time.length - 5)
+        let condition = `${weather.forecast.forecastday[0].hour[i].condition.text}`;
+        let temp = `${Math.round(weather.forecast.forecastday[0].hour[i].temp_c)}`;
+        let precip = `${weather.forecast.forecastday[0].hour[i].chance_of_rain}`;
+
+        resultsHTML += `<tr><td>${time}</td><td>${condition}</td><td>${temp}&deg;c</td><td>${precip}%</td><tr>`
+    }
     return resultsHTML
 }

@@ -194,3 +194,7 @@ input:focus {
 .date, .feelsLike {
     font-size: 15px;
 }
+
+#dailyForecast {
+    overflow-y: scroll;
+}
