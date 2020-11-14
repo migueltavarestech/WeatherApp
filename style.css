@@ -90,9 +90,20 @@ body {
 #wpConditions {
     background-color: var(--CFColors-Orange-rgba);
     color: white;
-    padding: 100px 20px 100px 20px;
-    resize: vertical;
+    /* padding: 100px 20px 100px 20px; */
+    /* resize: vertical; */
+    display: flex;
+    align-items: center;
+}
 
+/* .align-vertical {
+    vertical-align: middle;
+} */
+
+.horizontal-align {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 #wpForecast {
